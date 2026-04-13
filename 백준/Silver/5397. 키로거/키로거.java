@@ -5,46 +5,37 @@ public class Main{
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int num = Integer.parseInt(br.readLine());
-        String[] password = new String[num];
+        StringBuilder result = new StringBuilder();
         
-        
-        for(int i = 0; i<num; i++){
+        for(int i = 0; i< num; i++){
+            Stack<Character> left = new Stack<>();
+            Stack<Character> right = new Stack<>();
             String st = br.readLine();
-            List<Character> p1 = new LinkedList<>();
-            int cursor = 0;
             
             for(char c : st.toCharArray()){
                 if(c == '<'){
-                    if(cursor != 0){
-                        cursor--;
+                    if(!left.isEmpty()){
+                        right.push(left.pop());
                     }
                 }else if (c == '>'){
-                    if(cursor != p1.size()){
-                        cursor++;
+                    if(!right.isEmpty()){
+                        left.push(right.pop());
                     }
                 } else if (c == '-'){
-                    if(cursor != 0){
-                        p1.remove(cursor-1);
-                        cursor--;
+                    if(!left.isEmpty()){
+                        left.pop();
                     }
-                } else{
-                    p1.add(cursor, c);
-                    cursor++;
+                }else{
+                    left.push(c);
                 }
             }
             
-            StringBuilder sb = new StringBuilder();
-            for(char c : p1){
-                sb.append(c);
+            while (!left.isEmpty()) right.push(left.pop());
+            while (!right.isEmpty()) {
+                result.append(right.pop());
             }
-            password[i] = sb.toString();
-            
+            result.append("\n");
         }
-        
-        
-        for(int i = 0; i<num ; i++){
-            System.out.println(password[i]);
-        }
-        
+        System.out.print(result);
     }
 }
