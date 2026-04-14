@@ -14,12 +14,14 @@ public class Main{
             if(num != 0){
                 stack.push(num);
             }else{
-                stack.pop();
+                if(!stack.isEmpty()){
+                    stack.pop();    
+                }
             }
         }
         int sum = 0;
-        while (!stack.isEmpty()){
-            sum += stack.pop();
+        for(int x : stack){
+            sum += x;
         } 
         
         System.out.print(sum);
