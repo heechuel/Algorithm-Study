@@ -20,35 +20,16 @@ public class Main{
                     stack.push(X);
                     break;
                 case "pop":
-                    if(!stack.isEmpty()){
-                        sb.append(stack.pop());
-                        sb.append("\n");
-                    }else{
-                        sb.append(-1);
-                        sb.append("\n");
-                    }
+                    sb.append( stack.isEmpty() ? -1 : stack.pop() ).append("\n");
                     break;
                 case "size":
-                    sb.append(stack.size());
-                    sb.append("\n");
+                    sb.append(stack.size()).append("\n");
                     break;
                 case "empty":
-                    if(stack.size() == 0){
-                        sb.append(1);
-                        sb.append("\n");
-                    }else{
-                        sb.append(0);
-                        sb.append("\n");
-                    }
+                    sb.append(stack.isEmpty() ? 1 : 0 ).append("\n");
                     break;
                 case "top":
-                    if(!stack.isEmpty()){
-                        sb.append(stack.peek());
-                        sb.append("\n");
-                    }else{
-                        sb.append(-1);
-                        sb.append("\n");
-                    }
+                    sb.append(stack.isEmpty() ? -1 : stack.peek() ).append("\n");
                     break;
             }
         }
