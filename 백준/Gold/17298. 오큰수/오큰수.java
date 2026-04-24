@@ -4,31 +4,33 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        
-        int[] arr = new int[N];
-        int[] result = new int[N];
+        int n = Integer.parseInt(br.readLine());
         
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
+        
+        int[] arr = new int[n];
+        int[] result = new int[n];
+        
+        for(int i = 0; i<n; i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
         
         Deque<Integer> stack = new ArrayDeque<>();
         
-        for (int i = 0; i < N; i++) {
-            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
+        for(int i = 0; i<n; i++){
+            while(!stack.isEmpty() && arr[stack.peek()] < arr[i]){
                 result[stack.pop()] = arr[i];
             }
+            
             stack.push(i);
         }
         
-        while (!stack.isEmpty()) {
+        while(!stack.isEmpty()){
             result[stack.pop()] = -1;
         }
         
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < N; i++) {
+        for(int i = 0; i<n; i++){
             sb.append(result[i]).append(" ");
         }
         
