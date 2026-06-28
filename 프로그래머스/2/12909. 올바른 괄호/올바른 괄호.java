@@ -2,26 +2,20 @@ import java.util.*;
 
 class Solution {
     boolean solution(String s) {
+        Deque<Character> deque = new ArrayDeque<>();
         
-        Deque<Character> paren = new ArrayDeque<>();
+        char[] ch = s.toCharArray();
         
-        for(int i = 0; i<s.length(); i++){
-            if(paren.size() == 0){
-                paren.add(s.charAt(i));
-                continue;
+        for(char c : ch){
+            if(deque.isEmpty() && c == ')' ){
+                return false;
             }
             
-            int left = paren.peekLast();
-            int right = s.charAt(i);
-            
-            if(right - 1 == left ){
-                paren.pop();
-            }else{
-                paren.add(s.charAt(i));
-            }
+            if(c ==  '(' ) deque.addLast(c);
+            else deque.pollLast();
         }
         
-        if(paren.size() == 0){
+        if(deque.size() == 0){
             return true;
         }else{
             return false;
